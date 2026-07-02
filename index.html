@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wedding Card</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,300;0,400;0,600;1,300&family=Cormorant+Garamond:ital,wght@0,400;1,400&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ========== SECTION 1 : กำหนดการ ========== -->
+  <section id="program">
+    <h2 class="section-label">กำหนดการ</h2>
+
+    <!-- ดอกไม้บน: ใส่ไฟล์ images/flowers/flower-top.png -->
+    <div class="floral floral-top">
+      <img src="images/flowers/flower-top.png" alt="" onerror="this.style.display='none'">
+      <div class="floral-bg floral-bg-top" aria-hidden="true"></div>
+    </div>
+
+    <!-- Hero: ชื่อคู่บ่าวสาว / วันที่ / สถานที่ -->
+    <div class="hero-content">
+      <p class="invited-text">You are invited to the wedding of</p>
+      <h1 class="bride-name">Bride Name</h1>
+      <p class="ampersand">&amp;</p>
+      <h1 class="groom-name">Groom Name</h1>
+      <p class="wedding-date">DD Month YYYY</p>
+      <p class="venue-name">Venue Name</p>
+      <p class="venue-city">City</p>
+    </div>
+
+    <!-- ดอกไม้กลาง: ใส่ไฟล์ images/flowers/flower-mid.png -->
+    <div class="floral floral-mid">
+      <img src="images/flowers/flower-mid.png" alt="" onerror="this.style.display='none'">
+      <div class="floral-bg floral-bg-mid" aria-hidden="true"></div>
+    </div>
+
+    <!-- การ์ดเชิญภาษาไทย -->
+    <div class="invitation-content">
+      <div class="parents-row">
+        <div class="parents-col">
+          <!-- แก้ไขชื่อผู้ปกครองฝ่ายหญิง -->
+          <p>นางXXXX XXXXXX</p>
+          <p>นายXXXX XXXXXX</p>
+        </div>
+        <p class="and-text">และ</p>
+        <div class="parents-col">
+          <!-- แก้ไขชื่อผู้ปกครองฝ่ายชาย -->
+          <p>นางXXXX XXXXXX</p>
+          <p>นายXXXX XXXXXX</p>
+        </div>
+      </div>
+
+      <p class="invite-body">
+        มีความยินดีขอเรียนเชิญท่าน เพื่อเป็นเกียรติ<br>
+        เนื่องในพิธีมงคลสมรสระหว่าง
+      </p>
+
+      <!-- แก้ไขชื่อไทยเต็ม -->
+      <h2 class="thai-name">ชื่อเต็มฝ่ายหญิง (ชื่อเล่น)</h2>
+      <p class="thai-and">และ</p>
+      <h2 class="thai-name">ชื่อเต็มฝ่ายชาย (ชื่อเล่น)</h2>
+
+      <!-- แก้ไขสถานที่/เวลา -->
+      <div class="venue-details">
+        <p>ณ ห้องXXXX ชั้น X</p>
+        <p>ชื่อสถานที่ ที่อยู่</p>
+        <p>วันXXXXที่ XX เดือน XXXX พ.ศ. XXXX</p>
+      </div>
+
+      <!-- Timeline พิธีการ -->
+      <div class="schedule-timeline">
+        <div class="schedule-item">
+          <span class="schedule-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="12" r="4"/><circle cx="15" cy="12" r="4"/></svg>
+          </span>
+          <p class="schedule-time">09.00</p>
+          <p class="schedule-label">พิธีหมั้น</p>
+        </div>
+        <div class="schedule-item">
+          <span class="schedule-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 8h1a4 4 0 010 8h-1"/><path d="M3 8h14v9a4 4 0 01-4 4H7a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+          </span>
+          <p class="schedule-time">09.30</p>
+          <p class="schedule-label">พิธียกน้ำชา</p>
+        </div>
+        <div class="schedule-item">
+          <span class="schedule-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          </span>
+          <p class="schedule-time">11.00</p>
+          <p class="schedule-label">พิธีส่งตัว</p>
+        </div>
+        <div class="schedule-item">
+          <span class="schedule-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8h1a4 4 0 010 8h-1"/><rect x="2" y="4" width="12" height="14" rx="2"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/></svg>
+          </span>
+          <p class="schedule-time">12.30</p>
+          <p class="schedule-label">ร่วมรับประทานอาหาร<br>(โต๊ะจีน)</p>
+        </div>
+      </div>
+
+      <!-- QR Code: แทนที่ด้วยรูป QR จริง -->
+      <div class="qr-section">
+        <div class="qr-box">
+          <!-- ใส่รูป QR: <img src="images/qr.png" alt="QR Code"> -->
+          <div class="qr-placeholder">QR<br>Code</div>
+        </div>
+        <p class="qr-text">
+          เพื่อให้เตรียมการล่วงหน้าได้อย่างเหมาะสม<br>
+          กรุณาตอบรับการเข้าร่วมงานทาง QR Code<br>
+          ภายในเดือน XXXX XXXX
+        </p>
+      </div>
+    </div>
+
+    <!-- ดอกไม้ล่าง: ใส่ไฟล์ images/flowers/flower-bottom.png -->
+    <div class="floral floral-bottom">
+      <img src="images/flowers/flower-bottom.png" alt="" onerror="this.style.display='none'">
+      <div class="floral-bg floral-bg-bottom" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <!-- ========== SECTION 2 : ลงทะเบียน ========== -->
+  <section id="register">
+    <h2 class="section-label">ลงทะเบียน</h2>
+    <div class="register-content">
+      <h3 class="register-title">ลงทะเบียนเข้าร่วมงาน</h3>
+      <!--
+        แทนที่บล็อกด้านล่างด้วย embed code จาก Tally.so
+        วิธี: tally.so → สร้างฟอร์ม → Share → Embed → Copy code
+        แล้ววางที่นี่แทน div.tally-placeholder
+      -->
+      <div class="tally-placeholder">
+        <p>📋 แทนที่ด้วย Tally.so embed code</p>
+        <p class="tally-hint">ไปที่ <strong>tally.so</strong> → สร้างฟอร์ม → Share → Embed → Copy code<br>แล้ววางใน index.html แทน div นี้</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SECTION 3 : แกลลอรี่ ========== -->
+  <section id="gallery">
+    <h2 class="section-label">แกลลอรี่</h2>
+    <div class="gallery-slider">
+      <div class="gallery-track" id="galleryTrack">
+        <!-- ใส่รูป pre-wedding ใน images/gallery/ แล้วเพิ่ม/ลด slide ตามต้องการ -->
+        <div class="gallery-slide"><img src="images/gallery/G1.jpg" alt="Photo 1" onerror="this.parentElement.querySelector('.img-ph')?.style.setProperty('display','flex')"></div>
+        <div class="gallery-slide"><img src="images/gallery/G2.jpg" alt="Photo 2" onerror="this.parentElement.querySelector('.img-ph')?.style.setProperty('display','flex')"></div>
+        <div class="gallery-slide"><img src="images/gallery/G3.jpg" alt="Photo 3" onerror="this.parentElement.querySelector('.img-ph')?.style.setProperty('display','flex')"></div>
+        <div class="gallery-slide"><img src="images/gallery/G4.jpg" alt="Photo 4" onerror="this.parentElement.querySelector('.img-ph')?.style.setProperty('display','flex')"></div>
+        <div class="gallery-slide"><img src="images/gallery/G5.jpg" alt="Photo 5" onerror="this.parentElement.querySelector('.img-ph')?.style.setProperty('display','flex')"></div>
+        <div class="gallery-slide"><img src="images/gallery/G6.jpg" alt="Photo 6" onerror="this.parentElement.querySelector('.img-ph')?.style.setProperty('display','flex')"></div>
+      </div>
+    </div>
+    <div class="gallery-dots" id="galleryDots"></div>
+  </section>
+
+  <!-- ========== SECTION 4 : แผนที่ ========== -->
+  <section id="location">
+    <h2 class="section-label">แผนที่</h2>
+    <div class="map-container">
+      <!--
+        แทนที่ src ด้านล่างด้วย Google Maps embed URL ของสถานที่
+        วิธี: Google Maps → ค้นหาสถานที่ → Share → Embed a map → Copy HTML
+      -->
+      <iframe
+        src="about:blank"
+        title="แผนที่สถานที่จัดงาน"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+      <div class="map-placeholder" id="mapPlaceholder">
+        🗺️ แทนที่ด้วย Google Maps embed
+      </div>
+    </div>
+    <div class="venue-info">
+      <!-- แก้ไขชื่อสถานที่ / ที่อยู่ / เบอร์โทร -->
+      <h3>ชื่อสถานที่</h3>
+      <p>XXX ถ.XXXX แขวงXXXX เขตXXXX กรุงเทพมหานคร XXXXX</p>
+      <a href="tel:00000000" class="tel-link">โทร: 0X-XXXX-XXXX</a>
+    </div>
+  </section>
+
+  <!-- ========== BOTTOM NAVIGATION ========== -->
+  <nav class="bottom-nav" id="bottomNav">
+    <a href="#program" class="nav-item" data-section="program">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+      <span>กำหนดการ</span>
+    </a>
+    <a href="#register" class="nav-item" data-section="register">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/>
+        <line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/>
+      </svg>
+      <span>ลงทะเบียน</span>
+    </a>
+    <a href="#gallery" class="nav-item" data-section="gallery">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
+        <polyline points="21 15 16 10 5 21"/>
+      </svg>
+      <span>แกลลอรี่</span>
+    </a>
+    <a href="#location" class="nav-item" data-section="location">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+      </svg>
+      <span>แผนที่</span>
+    </a>
+  </nav>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
