@@ -30,9 +30,12 @@ online-card/
 ### 1. เติมข้อมูลจริงใน `index.html`
 ค้นหา `XXXX` เพื่อหาทุกจุดที่ต้องแก้:
 
+- [ ] ชื่อ + วันที่ ในหน้าเปิดการ์ด (intro cover) — `.intro-names`, `.intro-date`
 - [ ] ชื่อฝ่ายหญิง (อังกฤษ) — `.bride-name`
 - [ ] ชื่อฝ่ายชาย (อังกฤษ) — `.groom-name`
 - [ ] วันที่งาน (อังกฤษ) — `.wedding-date`
+- [ ] วันเวลาจริงใน countdown — `#countdown` ใส่ `data-date="2026-XX-XXT09:00:00+07:00"` (ปล่อยว่าง = ซ่อน countdown)
+- [ ] ชื่อย่อคู่บ่าวสาวใน footer — `.footer-monogram`
 - [ ] ชื่อสถานที่ + เมือง — `.venue-name`, `.venue-city`
 - [ ] ชื่อผู้ปกครองฝ่ายหญิง (2 คน)
 - [ ] ชื่อผู้ปกครองฝ่ายชาย (2 คน)
@@ -81,6 +84,6 @@ online-card/
 
 ## Tech Stack
 - HTML / CSS / JavaScript (ไม่มี framework)
-- Google Fonts: Sarabun · Dancing Script · Cormorant Garamond
+- Google Fonts: Sarabun · Great Vibes · Cormorant Garamond
 - Form: Tally.so embed
 - Host: GitHub Pages (free)

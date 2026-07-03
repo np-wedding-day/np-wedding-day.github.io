@@ -1,4 +1,18 @@
-// Bottom nav: highlight active section while scrolling
+// ===== INTRO COVER =====
+const intro = document.getElementById('intro');
+const introBtn = document.getElementById('introBtn');
+
+if (intro && introBtn) {
+  document.body.classList.add('locked');
+  introBtn.addEventListener('click', () => {
+    intro.classList.add('open');
+    intro.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('locked');
+    setTimeout(() => intro.remove(), 1100);
+  });
+}
+
+// ===== BOTTOM NAV: highlight active section while scrolling =====
 const sections = document.querySelectorAll('section[id]');
 const navItems = document.querySelectorAll('.nav-item');
 
@@ -8,10 +22,9 @@ function setActive(id) {
   });
 }
 
-// Set first tab active on load
 setActive('program');
 
-const observer = new IntersectionObserver(
+const navObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) setActive(entry.target.id);
@@ -20,9 +33,8 @@ const observer = new IntersectionObserver(
   { rootMargin: '-30% 0px -60% 0px', threshold: 0 }
 );
 
-sections.forEach((s) => observer.observe(s));
+sections.forEach((s) => navObserver.observe(s));
 
-// Smooth scroll: prevent default anchor jump, use scrollIntoView instead
 navItems.forEach((item) => {
   item.addEventListener('click', (e) => {
     e.preventDefault();
@@ -30,6 +42,63 @@ navItems.forEach((item) => {
     if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 });
+
+// ===== REVEAL ON SCROLL =====
+const revealEls = document.querySelectorAll('.reveal');
+
+if ('IntersectionObserver' in window && revealEls.length) {
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { rootMargin: '0px 0px -8% 0px', threshold: 0.1 }
+  );
+  revealEls.forEach((el) => revealObserver.observe(el));
+} else {
+  revealEls.forEach((el) => el.classList.add('in'));
+}
+
+// ===== COUNTDOWN =====
+const countdown = document.getElementById('countdown');
+
+if (countdown) {
+  const target = new Date(countdown.dataset.date).getTime();
+  if (!Number.isNaN(target)) {
+    const els = {
+      d: countdown.querySelector('[data-cd="d"]'),
+      h: countdown.querySelector('[data-cd="h"]'),
+      m: countdown.querySelector('[data-cd="m"]'),
+      s: countdown.querySelector('[data-cd="s"]'),
+    };
+    const pad = (n) => String(n).padStart(2, '0');
+    let cdTimer;
+
+    function tick() {
+      const diff = target - Date.now();
+      if (diff <= 0) {
+        els.d.textContent = '0';
+        els.h.textContent = '00';
+        els.m.textContent = '00';
+        els.s.textContent = '00';
+        clearInterval(cdTimer);
+        return;
+      }
+      els.d.textContent = Math.floor(diff / 86400000);
+      els.h.textContent = pad(Math.floor(diff / 3600000) % 24);
+      els.m.textContent = pad(Math.floor(diff / 60000) % 60);
+      els.s.textContent = pad(Math.floor(diff / 1000) % 60);
+    }
+
+    countdown.hidden = false;
+    tick();
+    cdTimer = setInterval(tick, 1000);
+  }
+}
 
 // ===== GALLERY SLIDESHOW =====
 const track = document.getElementById('galleryTrack');
@@ -93,10 +162,28 @@ if (track) {
     startTimer();
   }
 
+  // Arrow buttons
+  const prevBtn = document.getElementById('galPrev');
+  const nextBtn = document.getElementById('galNext');
+  if (prevBtn) prevBtn.addEventListener('click', () => { goTo(current - 1); resetTimer(); });
+  if (nextBtn) nextBtn.addEventListener('click', () => { goTo(current + 1); resetTimer(); });
+
   // Wait for images to potentially fail before building dots
   window.addEventListener('load', () => {
     buildDots();
-    if (getVisibleSlides().length > 1) startTimer();
+    const count = getVisibleSlides().length;
+    if (count > 1) startTimer();
+    if (count < 2) {
+      if (prevBtn) prevBtn.style.display = 'none';
+      if (nextBtn) nextBtn.style.display = 'none';
+    }
+    // ยังไม่มีรูปเลย → แสดง placeholder แทนการยุบหาย
+    if (count === 0) {
+      const ph = document.createElement('div');
+      ph.className = 'gallery-empty';
+      ph.innerHTML = '🖼️<br>ใส่รูป pre-wedding ใน images/gallery/';
+      track.parentElement.appendChild(ph);
+    }
   });
 
   // Swipe/touch support
@@ -126,14 +213,9 @@ if (track) {
   track.addEventListener('mouseleave', () => { dragging = false; });
 }
 
-// Hide map placeholder when iframe loads real content
+// ===== MAP: hide placeholder when iframe has real content =====
 const mapIframe = document.querySelector('.map-container iframe');
 const mapPh = document.getElementById('mapPlaceholder');
-if (mapIframe && mapPh) {
-  if (mapIframe.src === 'about:blank') {
-    // No map set yet — keep placeholder visible
-  } else {
-    mapIframe.addEventListener('load', () => { mapPh.style.display = 'none'; });
-    mapPh.style.display = 'none'; // hide immediately, iframe handles it
-  }
+if (mapIframe && mapPh && mapIframe.src !== 'about:blank') {
+  mapPh.style.display = 'none';
 }

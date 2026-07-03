@@ -2,45 +2,127 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wedding Card</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#4a5240">
+  <meta name="description" content="ขอเรียนเชิญร่วมงานมงคลสมรส — Wedding Invitation">
+  <meta property="og:title" content="Wedding Invitation">
+  <meta property="og:description" content="ขอเรียนเชิญร่วมงานมงคลสมรส">
+  <title>Wedding Invitation</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,300;0,400;0,600;1,300&family=Cormorant+Garamond:ital,wght@0,400;1,400&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Great+Vibes&family=Sarabun:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <noscript><style>.intro{display:none} .reveal{opacity:1;transform:none}</style></noscript>
 </head>
 <body>
 
+  <!-- ========== INTRO COVER (หน้าเปิดการ์ด) ========== -->
+  <div class="intro" id="intro" aria-hidden="false">
+    <div class="intro-frame" aria-hidden="true"></div>
+    <div class="intro-inner">
+      <p class="intro-eyebrow">The Wedding Of</p>
+      <!-- แก้ไขชื่อคู่บ่าวสาว (อังกฤษ) -->
+      <p class="intro-names">Bride<span class="intro-amp">&amp;</span>Groom</p>
+      <div class="orn-divider" aria-hidden="true"><span></span><i></i><span></span></div>
+      <!-- แก้ไขวันที่ -->
+      <p class="intro-date">DD &middot; MM &middot; YYYY</p>
+      <button class="intro-btn" id="introBtn" type="button">เปิดการ์ดเชิญ</button>
+    </div>
+  </div>
+
+  <!-- SVG defs กลาง: ลาย ornament ใบไม้ ใช้ร่วมกันทุกจุด -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <path id="leaf" d="M0 0 C 9 -15, 27 -21, 40 -11 C 28 3, 10 6, 0 0 Z"/>
+      <g id="spray">
+        <path d="M372 78 C 440 66, 520 70, 630 44" fill="none" stroke="#8a9a7c" stroke-width="1.4" stroke-linecap="round"/>
+        <g fill="#9dae8e" opacity="0.85">
+          <use href="#leaf" transform="translate(392,72) rotate(-38) scale(0.8)"/>
+          <use href="#leaf" transform="translate(438,68) rotate(-42) scale(0.85)"/>
+          <use href="#leaf" transform="translate(487,62) rotate(-46) scale(0.9)"/>
+          <use href="#leaf" transform="translate(538,56) rotate(-50) scale(0.85)"/>
+          <use href="#leaf" transform="translate(588,48) rotate(-54) scale(0.8)"/>
+          <use href="#leaf" transform="translate(630,44) rotate(-30) scale(0.55)"/>
+        </g>
+        <g fill="#7c8c6f" opacity="0.8">
+          <use href="#leaf" transform="translate(413,76) rotate(18) scale(0.72)"/>
+          <use href="#leaf" transform="translate(462,72) rotate(14) scale(0.78)"/>
+          <use href="#leaf" transform="translate(513,66) rotate(10) scale(0.78)"/>
+          <use href="#leaf" transform="translate(563,58) rotate(6) scale(0.72)"/>
+          <use href="#leaf" transform="translate(612,48) rotate(-10) scale(0.62)"/>
+        </g>
+        <g fill="#c2a368">
+          <circle cx="420" cy="60" r="2.2"/>
+          <circle cx="500" cy="50" r="2.4"/>
+          <circle cx="575" cy="40" r="2"/>
+          <circle cx="545" cy="72" r="1.8"/>
+        </g>
+      </g>
+    </defs>
+  </svg>
+
+  <main class="sheet">
+
   <!-- ========== SECTION 1 : กำหนดการ ========== -->
   <section id="program">
-    <h2 class="section-label">กำหนดการ</h2>
 
-    <!-- ดอกไม้บน: ใส่ไฟล์ images/flowers/flower-top.png -->
+    <!-- ดอกไม้บน: ใส่ไฟล์ images/flowers/flower-top.png (ถ้าไม่มี จะแสดง ornament SVG แทน) -->
     <div class="floral floral-top">
-      <img src="images/flowers/flower-top.png" alt="" onerror="this.style.display='none'">
-      <div class="floral-bg floral-bg-top" aria-hidden="true"></div>
+      <img src="images/flowers/flower-top.png" alt=""
+           onerror="this.closest('.floral').classList.add('img-missing'); this.remove()">
+      <svg class="floral-fallback" viewBox="0 0 720 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <use href="#spray"/>
+        <use href="#spray" transform="translate(720 0) scale(-1 1)"/>
+        <g transform="translate(360,70)" opacity="0.95">
+          <g fill="#dcc7b8">
+            <path d="M0 0 C -5 -8, -5 -16, 0 -20 C 5 -16, 5 -8, 0 0 Z"/>
+            <path d="M0 0 C -5 -8, -5 -16, 0 -20 C 5 -16, 5 -8, 0 0 Z" transform="rotate(72)"/>
+            <path d="M0 0 C -5 -8, -5 -16, 0 -20 C 5 -16, 5 -8, 0 0 Z" transform="rotate(144)"/>
+            <path d="M0 0 C -5 -8, -5 -16, 0 -20 C 5 -16, 5 -8, 0 0 Z" transform="rotate(216)"/>
+            <path d="M0 0 C -5 -8, -5 -16, 0 -20 C 5 -16, 5 -8, 0 0 Z" transform="rotate(288)"/>
+          </g>
+          <circle r="3.2" fill="#b08d4f"/>
+        </g>
+      </svg>
     </div>
 
     <!-- Hero: ชื่อคู่บ่าวสาว / วันที่ / สถานที่ -->
     <div class="hero-content">
-      <p class="invited-text">You are invited to the wedding of</p>
-      <h1 class="bride-name">Bride Name</h1>
-      <p class="ampersand">&amp;</p>
-      <h1 class="groom-name">Groom Name</h1>
-      <p class="wedding-date">DD Month YYYY</p>
-      <p class="venue-name">Venue Name</p>
-      <p class="venue-city">City</p>
+      <p class="invited-text reveal">You are invited to the wedding of</p>
+      <!-- แก้ไขชื่อคู่บ่าวสาว (อังกฤษ) -->
+      <h1 class="couple-names reveal">
+        <span class="script-name bride-name">Bride Name</span>
+        <span class="ampersand">&amp;</span>
+        <span class="script-name groom-name">Groom Name</span>
+      </h1>
+      <div class="orn-divider reveal" aria-hidden="true"><span></span><i></i><span></span></div>
+      <p class="wedding-date reveal">DD Month YYYY</p>
+      <p class="venue-name reveal">Venue Name</p>
+      <p class="venue-city reveal">City</p>
+
+      <!-- Countdown: ใส่วันเวลาจริงใน data-date เช่น data-date="2026-12-12T09:00:00+07:00" (ปล่อยว่าง = ซ่อน) -->
+      <div class="countdown reveal" id="countdown" data-date="" hidden>
+        <div class="cd-unit"><span class="cd-num" data-cd="d">0</span><span class="cd-label">วัน</span></div>
+        <div class="cd-unit"><span class="cd-num" data-cd="h">0</span><span class="cd-label">ชั่วโมง</span></div>
+        <div class="cd-unit"><span class="cd-num" data-cd="m">0</span><span class="cd-label">นาที</span></div>
+        <div class="cd-unit"><span class="cd-num" data-cd="s">0</span><span class="cd-label">วินาที</span></div>
+      </div>
     </div>
 
     <!-- ดอกไม้กลาง: ใส่ไฟล์ images/flowers/flower-mid.png -->
     <div class="floral floral-mid">
-      <img src="images/flowers/flower-mid.png" alt="" onerror="this.style.display='none'">
-      <div class="floral-bg floral-bg-mid" aria-hidden="true"></div>
+      <img src="images/flowers/flower-mid.png" alt=""
+           onerror="this.closest('.floral').classList.add('img-missing'); this.remove()">
+      <svg class="floral-fallback" viewBox="0 0 720 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <use href="#spray"/>
+        <use href="#spray" transform="translate(720 0) scale(-1 1)"/>
+        <g transform="translate(360,74)"><rect x="-4" y="-4" width="8" height="8" transform="rotate(45)" fill="#b08d4f"/></g>
+      </svg>
     </div>
 
     <!-- การ์ดเชิญภาษาไทย -->
     <div class="invitation-content">
-      <div class="parents-row">
+      <div class="parents-row reveal">
         <div class="parents-col">
           <!-- แก้ไขชื่อผู้ปกครองฝ่ายหญิง -->
           <p>นางXXXX XXXXXX</p>
@@ -54,81 +136,100 @@
         </div>
       </div>
 
-      <p class="invite-body">
+      <p class="invite-body reveal">
         มีความยินดีขอเรียนเชิญท่าน เพื่อเป็นเกียรติ<br>
         เนื่องในพิธีมงคลสมรสระหว่าง
       </p>
 
       <!-- แก้ไขชื่อไทยเต็ม -->
-      <h2 class="thai-name">ชื่อเต็มฝ่ายหญิง (ชื่อเล่น)</h2>
-      <p class="thai-and">และ</p>
-      <h2 class="thai-name">ชื่อเต็มฝ่ายชาย (ชื่อเล่น)</h2>
+      <div class="thai-names reveal">
+        <h2 class="thai-name">ชื่อเต็มฝ่ายหญิง (ชื่อเล่น)</h2>
+        <p class="thai-and">และ</p>
+        <h2 class="thai-name">ชื่อเต็มฝ่ายชาย (ชื่อเล่น)</h2>
+      </div>
 
       <!-- แก้ไขสถานที่/เวลา -->
-      <div class="venue-details">
+      <div class="venue-details reveal">
         <p>ณ ห้องXXXX ชั้น X</p>
         <p>ชื่อสถานที่ ที่อยู่</p>
         <p>วันXXXXที่ XX เดือน XXXX พ.ศ. XXXX</p>
       </div>
 
       <!-- Timeline พิธีการ -->
-      <div class="schedule-timeline">
+      <header class="section-head reveal">
+        <p class="eyebrow">Wedding Day</p>
+        <h2 class="section-title">กำหนดการ</h2>
+        <div class="orn-divider" aria-hidden="true"><span></span><i></i><span></span></div>
+      </header>
+
+      <div class="schedule-timeline reveal">
         <div class="schedule-item">
           <span class="schedule-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="12" r="4"/><circle cx="15" cy="12" r="4"/></svg>
           </span>
-          <p class="schedule-time">09.00</p>
+          <p class="schedule-time">09:00</p>
           <p class="schedule-label">พิธีหมั้น</p>
         </div>
         <div class="schedule-item">
           <span class="schedule-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 8h1a4 4 0 010 8h-1"/><path d="M3 8h14v9a4 4 0 01-4 4H7a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
           </span>
-          <p class="schedule-time">09.30</p>
+          <p class="schedule-time">09:30</p>
           <p class="schedule-label">พิธียกน้ำชา</p>
         </div>
         <div class="schedule-item">
           <span class="schedule-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
           </span>
-          <p class="schedule-time">11.00</p>
+          <p class="schedule-time">11:00</p>
           <p class="schedule-label">พิธีส่งตัว</p>
         </div>
         <div class="schedule-item">
           <span class="schedule-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8h1a4 4 0 010 8h-1"/><rect x="2" y="4" width="12" height="14" rx="2"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/></svg>
           </span>
-          <p class="schedule-time">12.30</p>
+          <p class="schedule-time">12:30</p>
           <p class="schedule-label">ร่วมรับประทานอาหาร<br>(โต๊ะจีน)</p>
         </div>
       </div>
 
       <!-- QR Code: แทนที่ด้วยรูป QR จริง -->
-      <div class="qr-section">
-        <div class="qr-box">
-          <!-- ใส่รูป QR: <img src="images/qr.png" alt="QR Code"> -->
-          <div class="qr-placeholder">QR<br>Code</div>
+      <div class="qr-frame reveal">
+        <div class="qr-section">
+          <div class="qr-box">
+            <!-- ใส่รูป QR: <img src="images/qr.png" alt="QR Code"> -->
+            <div class="qr-placeholder">QR<br>Code</div>
+          </div>
+          <p class="qr-text">
+            เพื่อให้เตรียมการล่วงหน้าได้อย่างเหมาะสม<br>
+            กรุณาตอบรับการเข้าร่วมงานทาง QR Code<br>
+            ภายในเดือน XXXX XXXX
+          </p>
         </div>
-        <p class="qr-text">
-          เพื่อให้เตรียมการล่วงหน้าได้อย่างเหมาะสม<br>
-          กรุณาตอบรับการเข้าร่วมงานทาง QR Code<br>
-          ภายในเดือน XXXX XXXX
-        </p>
       </div>
     </div>
 
     <!-- ดอกไม้ล่าง: ใส่ไฟล์ images/flowers/flower-bottom.png -->
     <div class="floral floral-bottom">
-      <img src="images/flowers/flower-bottom.png" alt="" onerror="this.style.display='none'">
-      <div class="floral-bg floral-bg-bottom" aria-hidden="true"></div>
+      <img src="images/flowers/flower-bottom.png" alt=""
+           onerror="this.closest('.floral').classList.add('img-missing'); this.remove()">
+      <svg class="floral-fallback" viewBox="0 0 720 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <use href="#spray"/>
+        <use href="#spray" transform="translate(720 0) scale(-1 1)"/>
+        <g transform="translate(360,74)"><rect x="-4" y="-4" width="8" height="8" transform="rotate(45)" fill="#b08d4f"/></g>
+      </svg>
     </div>
   </section>
 
   <!-- ========== SECTION 2 : ลงทะเบียน ========== -->
   <section id="register">
-    <h2 class="section-label">ลงทะเบียน</h2>
-    <div class="register-content">
-      <h3 class="register-title">ลงทะเบียนเข้าร่วมงาน</h3>
+    <header class="section-head reveal">
+      <p class="eyebrow">R S V P</p>
+      <h2 class="section-title">ลงทะเบียนเข้าร่วมงาน</h2>
+      <div class="orn-divider" aria-hidden="true"><span></span><i></i><span></span></div>
+    </header>
+    <div class="register-content reveal">
+      <p class="register-note">โปรดแจ้งการเข้าร่วมงานของท่าน เพื่อให้เราได้ต้อนรับอย่างอบอุ่นที่สุด</p>
       <!--
         แทนที่บล็อกด้านล่างด้วย embed code จาก Tally.so
         วิธี: tally.so → สร้างฟอร์ม → Share → Embed → Copy code
@@ -143,25 +244,41 @@
 
   <!-- ========== SECTION 3 : แกลลอรี่ ========== -->
   <section id="gallery">
-    <h2 class="section-label">แกลลอรี่</h2>
-    <div class="gallery-slider">
-      <div class="gallery-track" id="galleryTrack">
-        <!-- ใส่รูป pre-wedding ใน images/gallery/ แล้วเพิ่ม/ลด slide ตามต้องการ -->
-        <div class="gallery-slide"><img src="images/gallery/G1.jpg" alt="Photo 1" onerror="this.parentElement.querySelector('.img-ph')?.style.setProperty('display','flex')"></div>
-        <div class="gallery-slide"><img src="images/gallery/G2.jpg" alt="Photo 2" onerror="this.parentElement.querySelector('.img-ph')?.style.setProperty('display','flex')"></div>
-        <div class="gallery-slide"><img src="images/gallery/G3.jpg" alt="Photo 3" onerror="this.parentElement.querySelector('.img-ph')?.style.setProperty('display','flex')"></div>
-        <div class="gallery-slide"><img src="images/gallery/G4.jpg" alt="Photo 4" onerror="this.parentElement.querySelector('.img-ph')?.style.setProperty('display','flex')"></div>
-        <div class="gallery-slide"><img src="images/gallery/G5.jpg" alt="Photo 5" onerror="this.parentElement.querySelector('.img-ph')?.style.setProperty('display','flex')"></div>
-        <div class="gallery-slide"><img src="images/gallery/G6.jpg" alt="Photo 6" onerror="this.parentElement.querySelector('.img-ph')?.style.setProperty('display','flex')"></div>
+    <header class="section-head reveal">
+      <p class="eyebrow">Our Moments</p>
+      <h2 class="section-title">แกลลอรี่</h2>
+      <div class="orn-divider" aria-hidden="true"><span></span><i></i><span></span></div>
+    </header>
+    <div class="gallery-wrap reveal">
+      <div class="gallery-slider">
+        <div class="gallery-track" id="galleryTrack">
+          <!-- ใส่รูป pre-wedding ใน images/gallery/ แล้วเพิ่ม/ลด slide ตามต้องการ -->
+          <div class="gallery-slide"><img src="images/gallery/G1.jpg" alt="Photo 1"></div>
+          <div class="gallery-slide"><img src="images/gallery/G2.jpg" alt="Photo 2"></div>
+          <div class="gallery-slide"><img src="images/gallery/G3.jpg" alt="Photo 3"></div>
+          <div class="gallery-slide"><img src="images/gallery/G4.jpg" alt="Photo 4"></div>
+          <div class="gallery-slide"><img src="images/gallery/G5.jpg" alt="Photo 5"></div>
+          <div class="gallery-slide"><img src="images/gallery/G6.jpg" alt="Photo 6"></div>
+        </div>
+        <button class="gal-arrow prev" id="galPrev" type="button" aria-label="รูปก่อนหน้า">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="gal-arrow next" id="galNext" type="button" aria-label="รูปถัดไป">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
       </div>
+      <div class="gallery-dots" id="galleryDots"></div>
     </div>
-    <div class="gallery-dots" id="galleryDots"></div>
   </section>
 
   <!-- ========== SECTION 4 : แผนที่ ========== -->
   <section id="location">
-    <h2 class="section-label">แผนที่</h2>
-    <div class="map-container">
+    <header class="section-head reveal">
+      <p class="eyebrow">Location</p>
+      <h2 class="section-title">แผนที่</h2>
+      <div class="orn-divider" aria-hidden="true"><span></span><i></i><span></span></div>
+    </header>
+    <div class="map-container reveal">
       <!--
         แทนที่ src ด้านล่างด้วย Google Maps embed URL ของสถานที่
         วิธี: Google Maps → ค้นหาสถานที่ → Share → Embed a map → Copy HTML
@@ -176,13 +293,25 @@
         🗺️ แทนที่ด้วย Google Maps embed
       </div>
     </div>
-    <div class="venue-info">
+    <div class="venue-info reveal">
       <!-- แก้ไขชื่อสถานที่ / ที่อยู่ / เบอร์โทร -->
       <h3>ชื่อสถานที่</h3>
       <p>XXX ถ.XXXX แขวงXXXX เขตXXXX กรุงเทพมหานคร XXXXX</p>
-      <a href="tel:00000000" class="tel-link">โทร: 0X-XXXX-XXXX</a>
+      <a href="tel:00000000" class="tel-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="15" height="15"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>
+        โทร: 0X-XXXX-XXXX
+      </a>
     </div>
+
+    <footer class="site-footer">
+      <div class="orn-divider" aria-hidden="true"><span></span><i></i><span></span></div>
+      <!-- แก้ไขชื่อย่อคู่บ่าวสาว -->
+      <p class="footer-monogram">B &amp; G</p>
+      <p class="footer-text">With love, we can't wait to celebrate with you</p>
+    </footer>
   </section>
+
+  </main>
 
   <!-- ========== BOTTOM NAVIGATION ========== -->
   <nav class="bottom-nav" id="bottomNav">
