@@ -1,15 +1,24 @@
-// ===== INTRO COVER =====
+// ===== INTRO COVER (envelope + wax seal) =====
 const intro = document.getElementById('intro');
 const introBtn = document.getElementById('introBtn');
+const envelope = document.getElementById('envelope');
 
-if (intro && introBtn) {
+if (intro && introBtn && envelope) {
   document.body.classList.add('locked');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   introBtn.addEventListener('click', () => {
-    intro.classList.add('open');
-    intro.setAttribute('aria-hidden', 'true');
-    document.body.classList.remove('locked');
-    setTimeout(() => intro.remove(), 1100);
-  });
+    // ลำดับ: ตราผนึกแตก → ฝาซองเปิด → จดหมายเลื่อนขึ้น → fade เข้าสู่การ์ด
+    envelope.classList.add('opening');
+    intro.classList.add('opening-hint-off');
+    const openDelay = reduceMotion ? 150 : 2100;
+    setTimeout(() => {
+      intro.classList.add('open');
+      intro.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('locked');
+      setTimeout(() => intro.remove(), 1100);
+    }, openDelay);
+  }, { once: true });
 }
 
 // ===== BOTTOM NAV: highlight active section while scrolling =====
@@ -98,6 +107,30 @@ if (countdown) {
     tick();
     cdTimer = setInterval(tick, 1000);
   }
+}
+
+// ===== LIVE SCHEDULE: ไฮไลต์พิธีที่กำลังดำเนินอยู่ในวันงานจริง =====
+// ใช้วันที่จาก #countdown data-date + เวลาใน data-time ของแต่ละ .schedule-item
+const timeline = document.getElementById('scheduleTimeline');
+
+if (timeline && countdown && countdown.dataset.date) {
+  const day = countdown.dataset.date.slice(0, 10); // YYYY-MM-DD
+  const items = Array.from(timeline.querySelectorAll('.schedule-item[data-time]'));
+
+  function updateLiveSchedule() {
+    const now = new Date();
+    items.forEach((item) => {
+      const start = new Date(`${day}T${item.dataset.time}:00`);
+      if (Number.isNaN(start.getTime())) return;
+      const durMin = parseInt(item.dataset.dur, 10) || 60;
+      const end = new Date(start.getTime() + durMin * 60000);
+      item.classList.toggle('live', now >= start && now < end);
+      item.classList.toggle('done', now >= end);
+    });
+  }
+
+  updateLiveSchedule();
+  setInterval(updateLiveSchedule, 60000);
 }
 
 // ===== GALLERY SLIDESHOW =====
