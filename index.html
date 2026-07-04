@@ -15,7 +15,7 @@
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Great+Vibes&family=Sarabun:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap"
     rel="stylesheet">
   <!-- ?v=N : เปลี่ยนเลขทุกครั้งที่แก้ css/js เพื่อบังคับ browser โหลดไฟล์ใหม่ -->
-  <link rel="stylesheet" href="css/style.css?v=5">
+  <link rel="stylesheet" href="css/style.css?v=6">
   <noscript>
     <style>
       .intro {
@@ -56,7 +56,7 @@
         <div class="env-flap" aria-hidden="true"></div>
         <!-- แก้ไขอักษรย่อบนตราผนึก -->
         <button class="wax-seal" id="introBtn" type="button" aria-label="เปิดการ์ดเชิญ">
-          <span class="seal-initials">W.S</span>
+          <img src="images/logo/wax-seal.svg" alt="">
         </button>
       </div>
       <p class="intro-hint">แตะตราผนึกเพื่อเปิดการ์ดเชิญ</p>
@@ -206,49 +206,30 @@
 
         <!-- data-time ต้องตรงกับเวลาจริง — ใช้คู่กับ data-date ของ #countdown เพื่อไฮไลต์พิธีที่กำลังดำเนินอยู่ -->
         <div class="schedule-timeline reveal" id="scheduleTimeline">
-          <div class="schedule-item" data-time="09:00" data-dur="30">
+          <div class="schedule-item" data-time="07:19" data-dur="120">
             <span class="schedule-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <circle cx="9" cy="12" r="4" />
-                <circle cx="15" cy="12" r="4" />
-              </svg>
+              <img src="images/program/buhda.svg" alt="">
             </span>
             <p class="schedule-time">07:19</p>
             <p class="schedule-label">พิธีสงฆ์</p>
           </div>
-          <div class="schedule-item" data-time="09:30" data-dur="90">
+          <div class="schedule-item" data-time="09:19" data-dur="60">
             <span class="schedule-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M17 8h1a4 4 0 010 8h-1" />
-                <path d="M3 8h14v9a4 4 0 01-4 4H7a4 4 0 01-4-4V8z" />
-                <line x1="6" y1="1" x2="6" y2="4" />
-                <line x1="10" y1="1" x2="10" y2="4" />
-                <line x1="14" y1="1" x2="14" y2="4" />
-              </svg>
+              <img src="images/program/kanmark.svg" alt="">
             </span>
             <p class="schedule-time">09:19</p>
             <p class="schedule-label">ขันหมาก</p>
           </div>
-          <div class="schedule-item" data-time="11:00" data-dur="90">
+          <div class="schedule-item" data-time="10:19" data-dur="60">
             <span class="schedule-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-                <circle cx="9" cy="7" r="4" />
-                <path d="M23 21v-2a4 4 0 00-3-3.87" />
-                <path d="M16 3.13a4 4 0 010 7.75" />
-              </svg>
+              <img src="images/program/sang.svg" alt="">
             </span>
             <p class="schedule-time">10:19</p>
             <p class="schedule-label">รดน้ำสังข์</p>
           </div>
-          <div class="schedule-item" data-time="12:30" data-dur="120">
+          <div class="schedule-item" data-time="11:19" data-dur="120">
             <span class="schedule-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M18 8h1a4 4 0 010 8h-1" />
-                <rect x="2" y="4" width="12" height="14" rx="2" />
-                <line x1="6" y1="2" x2="6" y2="4" />
-                <line x1="10" y1="2" x2="10" y2="4" />
-              </svg>
+              <img src="images/program/lanch.svg" alt="">
             </span>
             <p class="schedule-time">11:19</p>
             <p class="schedule-label">ร่วมรับประทานอาหาร<br>(โต๊ะจีน)</p>
@@ -425,7 +406,7 @@
     </a>
   </nav>
 
-  <script src="js/main.js?v=5"></script>
+  <script src="js/main.js?v=6"></script>
 </body>
 
 </html>
