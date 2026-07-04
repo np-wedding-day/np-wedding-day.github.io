@@ -142,7 +142,8 @@ section {
 .env-back {
   position: absolute;
   inset: 0;
-  background: linear-gradient(170deg, #ddd4bd, #d2c8ae);
+  /* สีต้องเข้ากับ env-pocket เพราะช่องบนซอง (ระหว่าง flap กับขอบ) โผล่มาเห็นชั้นนี้ตอนฝาพับ */
+  background: linear-gradient(170deg, #ece4d0, #e2d9c2);
   border-radius: 8px;
   z-index: 1;
 }
@@ -162,40 +163,13 @@ section {
   text-align: center;
   padding: 0.8rem;
   z-index: 2;
-  transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1) 0.9s, z-index 0s 0.9s;
-}
-
-/* ปีกข้างซอง — ปิดช่องว่างระหว่างฝากับตัวซอง */
-.env-sides {
-  position: absolute;
-  inset: 0;
-  border-radius: 8px;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: 3;
-}
-
-.env-sides::before,
-.env-sides::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-}
-
-.env-sides::before {
-  clip-path: polygon(0 0, 50% 50%, 0 100%);
-  background: linear-gradient(90deg, #eae2cd 0%, #ddd3ba 100%);
-}
-
-.env-sides::after {
-  clip-path: polygon(100% 0, 50% 50%, 100% 100%);
-  background: linear-gradient(-90deg, #eae2cd 0%, #ddd3ba 100%);
 }
 
 .env-pocket {
   position: absolute;
   inset: 0;
-  clip-path: polygon(0 16%, 50% 58%, 100% 16%, 100% 100%, 0 100%);
+  /* รอยบากต้องตรงกับรูปสามเหลี่ยมของ env-flap เป๊ะๆ (0 0, 50% 56%, 100% 0) ไม่งั้นจะมีช่องว่างโผล่ตอนฝาเปิด */
+  clip-path: polygon(0 0, 50% 56%, 100% 0, 100% 100%, 0 100%);
   background: linear-gradient(180deg, #ece4d0 0%, #e2d9c2 100%);
   border-radius: 8px;
   z-index: 4;
@@ -275,6 +249,7 @@ section {
 .envelope.opening .env-letter {
   transform: translateY(-62%);
   z-index: 7;
+  transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1) 0.9s, z-index 0s 0.9s;
 }
 
 /* ----- Letter content ----- */
