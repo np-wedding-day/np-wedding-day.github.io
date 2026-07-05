@@ -129,81 +129,105 @@ section {
   z-index: 2;
 }
 
-/* ----- Envelope ----- */
+/* ============================================================
+   Envelope — โครงสร้าง/กลไกตาม CodePen (ahoidahl/mydZXQJ)
+   ปรับสี+เนื้อหาให้เข้าธีมงานแต่ง
+   - จดหมายเลื่อนขึ้นจาก "หลังด้านหน้าซอง" ในกรอบ overflow:hidden
+   - ฝาสามเหลี่ยมพลิกขึ้น (rotateX) ตราผนึกติดปลายฝาไปด้วย
+   ============================================================ */
 .envelope {
   position: relative;
-  /* จำกัดด้วย 90vh กันซองล้นจอแนวนอน (มือถือ landscape) */
-  width: min(86vw, 600px, 90vh);
-  aspect-ratio: 10 / 7;
-  perspective: 1200px;
-  filter: drop-shadow(0 22px 40px rgba(74, 82, 64, 0.28));
+  width: min(80vw, 400px, 60vh);
+  cursor: pointer;
+  filter: drop-shadow(0 24px 44px rgba(74, 82, 64, 0.26));
+  /* ชดเชยช่องว่างโปร่งด้านบน (top 45%) ให้ "ตัวซองที่มองเห็น" อยู่กึ่งกลางจอตอนปิด */
+  transform: translateY(-22%);
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.env-back {
+.env-wrap {
+  position: relative;
+  width: 100%;
+  padding-top: 118%; /* สัดส่วนแนวตั้งแบบการ์ด */
+  overflow: hidden;
+  border-radius: 10px;
+  background: transparent;
+}
+
+/* พื้นตัวซอง (แยกเป็น ::before เพื่อให้จางหายได้ตอนเผยการ์ด โดยไม่จางตัวจดหมาย)
+   ล่าง 55% = ตัวซอง(ทึบ), บน 45% = โปร่ง (ที่ว่างให้จดหมายโผล่ขึ้นมา) */
+.env-wrap::before {
+  content: "";
   position: absolute;
   inset: 0;
-  /* สีต้องเข้ากับ env-pocket เพราะช่องบนซอง (ระหว่าง flap กับขอบ) โผล่มาเห็นชั้นนี้ตอนฝาพับ */
-  background: linear-gradient(170deg, #ece4d0, #e2d9c2);
-  border-radius: 8px;
-  z-index: 1;
+  z-index: 0;
+  background: linear-gradient(
+    0deg,
+    #e6d9c1 0%,
+    #e6d9c1 55%,
+    rgba(230, 217, 193, 0) 55%,
+    rgba(230, 217, 193, 0) 100%
+  );
+  transition: opacity 0.35s ease;
 }
 
+/* ----- จดหมาย: เริ่มซ่อนใต้ซอง (top:100%) เลื่อนขึ้นตอนเปิด ----- */
 .env-letter {
   position: absolute;
-  left: 5%;
-  right: 5%;
-  top: 9%;
-  bottom: 10%;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 7% 11% 0;
   background: var(--ivory);
-  border: 1px solid var(--gold-faint);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   text-align: center;
-  padding: 0.8rem;
   z-index: 2;
+  pointer-events: none;
+  transition: top 0.55s ease-in-out;
 }
 
-.env-pocket {
-  position: absolute;
-  inset: 0;
-  /* รอยบากต้องตรงกับรูปสามเหลี่ยมของ env-flap เป๊ะๆ (0 0, 50% 56%, 100% 0) ไม่งั้นจะมีช่องว่างโผล่ตอนฝาเปิด */
-  clip-path: polygon(0 0, 50% 56%, 100% 0, 100% 100%, 0 100%);
-  background: linear-gradient(180deg, #ece4d0 0%, #e2d9c2 100%);
-  border-radius: 8px;
-  z-index: 4;
-}
-
+/* ----- ฝาซอง (สามเหลี่ยมชี้ลง) + ตราผนึกที่ปลายฝา ----- */
 .env-flap {
   position: absolute;
+  top: 45%;
   left: 0;
-  right: 0;
-  top: 0;
-  height: 56%;
-  clip-path: polygon(0 0, 100% 0, 50% 100%);
-  background: linear-gradient(180deg, #efe8d6 0%, #e0d6bd 100%);
-  border-radius: 8px 8px 0 0;
-  transform-origin: top center;
-  z-index: 5;
-  transition: transform 0.85s cubic-bezier(0.45, 0, 0.2, 1) 0.25s;
+  width: 100%;
+  height: 33%;
+  z-index: 99;
+  transform-origin: top;
+  filter: drop-shadow(0 5px 3px rgba(74, 82, 64, 0.1));
+  transition: transform 0.4s ease-in-out 0.2s, z-index 0s 0.4s;
 }
 
-/* ----- Wax seal (รูปจริงจาก images/logo/wax-seal.svg) ----- */
+.env-flap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform-origin: top;
+  background: linear-gradient(180deg, #efe8d6 0%, #e2d9bf 100%);
+  clip-path: polygon(50% 100%, 0 0, 100% 0);
+}
+
 .wax-seal {
   position: absolute;
-  top: 56%;
+  /* ปลายล่างของฝา (จุดสามเหลี่ยม) */
+  top: 100%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: clamp(84px, 24vw, 118px);
-  height: clamp(84px, 24vw, 118px);
+  width: clamp(64px, 19vw, 92px);
+  height: clamp(64px, 19vw, 92px);
   padding: 0;
   border: none;
   cursor: pointer;
-  z-index: 6;
+  z-index: 2;
   background: transparent;
   border-radius: 50%;
-  transition: transform 0.3s ease;
+  /* ติดปลายฝา: พลิกขึ้นไปพร้อมฝา พอเลย 90° จะซ่อนเอง (ไม่เห็นด้านหลังกลับด้าน) */
+  backface-visibility: hidden;
   animation: seal-breathe 2.8s ease-in-out infinite;
 }
 
@@ -211,12 +235,7 @@ section {
   width: 100%;
   height: 100%;
   display: block;
-  filter: drop-shadow(0 6px 14px rgba(58, 69, 49, 0.4));
-}
-
-.wax-seal:hover,
-.wax-seal:focus-visible {
-  transform: translate(-50%, -50%) scale(1.07);
+  filter: drop-shadow(0 5px 12px rgba(58, 69, 49, 0.4));
 }
 
 @keyframes seal-breathe {
@@ -225,31 +244,122 @@ section {
     box-shadow: 0 0 0 0 rgba(176, 141, 79, 0.35);
   }
   50% {
-    box-shadow: 0 0 0 14px rgba(176, 141, 79, 0);
+    box-shadow: 0 0 0 13px rgba(176, 141, 79, 0);
   }
 }
 
-/* ----- Opening sequence (คลิกตราผนึก) ----- */
+/* ----- ด้านหน้าซอง: คลุมครึ่งล่างของจดหมาย มีรอยบากตัว V ----- */
+.env-front-wrap {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 55%;
+  z-index: 2;
+  filter: drop-shadow(0 -5px 4px rgba(74, 82, 64, 0.08));
+}
+
+.env-front {
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(50% 50%, 100% 0, 100% 100%, 0 100%, 0 0);
+  background: #ecdfc6;
+}
+
+.env-front::before,
+.env-front::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background: #e2d4b8; /* เงารอยพับด้านข้าง */
+}
+
+.env-front::before {
+  left: 0;
+  clip-path: polygon(100% 50%, 0 0, 0 100%);
+}
+
+.env-front::after {
+  right: 0;
+  clip-path: polygon(0 50%, 100% 0, 100% 100%);
+}
+
+/* ----- เปิดซอง: hover (เดสก์ท็อป) หรือคลิก (.opening) ----- */
+@media (hover: hover) and (pointer: fine) {
+  /* ตอน hover เลื่อนซองลงมาให้ทั้งชุด(เปิดแล้ว)อยู่กึ่งกลางจอ */
+  .envelope:not(.revealing):hover {
+    transform: translateY(0);
+  }
+  .envelope:not(.revealing):hover .env-letter {
+    top: 0;
+  }
+  .envelope:not(.revealing):hover .env-flap {
+    transform: rotateX(-180deg);
+    z-index: 1;
+    transition-delay: 0s;
+  }
+  .envelope:not(.revealing):hover .wax-seal {
+    animation: none;
+  }
+}
+
+/* คลิก/แตะ: บังคับเปิด + จัดกึ่งกลาง (ครอบเคสจอสัมผัสที่ไม่มี hover) */
+.envelope.opening {
+  transform: translateY(0);
+}
+
+.envelope.opening .env-letter {
+  top: 0;
+}
+
+.envelope.opening .env-flap {
+  transform: rotateX(-180deg);
+  z-index: 1;
+  transition-delay: 0s;
+}
+
 .envelope.opening .wax-seal {
-  opacity: 0;
-  transform: translate(-50%, -50%) scale(0.3) rotate(-22deg);
-  transition: transform 0.45s ease, opacity 0.45s ease;
   animation: none;
   pointer-events: none;
 }
 
-.envelope.opening .env-flap {
-  /* พับขึ้นแล้วจางหาย — ไม่ทิ้งเศษสามเหลี่ยมค้างหลังการ์ด */
-  transform: rotateX(180deg);
-  opacity: 0;
-  transition: transform 0.85s cubic-bezier(0.45, 0, 0.2, 1) 0.25s,
-    opacity 0.45s ease 0.95s;
+/* ----- เผยการ์ด: จดหมายลอยพ้นซอง → ขยายเต็มจอ → จางเป็นหน้าการ์ด ----- */
+/* เปลือกซอง (พื้น + ฝา + ด้านหน้า) จางหายไป เหลือแต่จดหมายลอยขึ้น */
+.envelope.revealing {
+  pointer-events: none;
 }
 
-.envelope.opening .env-letter {
-  transform: translateY(-62%);
-  z-index: 7;
-  transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1) 0.9s, z-index 0s 0.9s;
+.envelope.revealing .env-wrap {
+  overflow: visible; /* ปลดคลิปเพื่อให้จดหมายขยายพ้นขอบซองได้ */
+}
+
+.envelope.revealing .env-wrap::before,
+.envelope.revealing .env-flap,
+.envelope.revealing .env-front-wrap {
+  opacity: 0;
+}
+
+.envelope.revealing .env-letter {
+  animation: letter-rise-settle 1.05s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes letter-rise-settle {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  32% {
+    /* จังหวะ 1: ลอยพ้นตัวซอง */
+    transform: translateY(-16%) scale(1.03);
+    opacity: 1;
+  }
+  100% {
+    /* จังหวะ 2: ขยายเต็มจอแล้วจางเข้าเป็นหน้าการ์ด */
+    transform: translateY(-26%) scale(1.9);
+    opacity: 0;
+  }
 }
 
 /* ----- Letter content ----- */
@@ -1308,8 +1418,13 @@ section {
   }
   .env-flap,
   .env-letter,
+  .envelope,
   .envelope.opening .wax-seal {
     transition: none;
+  }
+  .envelope.revealing .env-letter {
+    animation: none;
+    opacity: 0;
   }
   .nav-icon-wrap,
   .nav-label {

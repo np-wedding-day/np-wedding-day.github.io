@@ -9,22 +9,27 @@ if (intro && introBtn && envelope) {
     "(prefers-reduced-motion: reduce)"
   ).matches;
 
-  introBtn.addEventListener(
-    "click",
-    () => {
-      // ลำดับ: ตราผนึกแตก → ฝาซองเปิด → จดหมายเลื่อนขึ้น → fade เข้าสู่การ์ด
-      envelope.classList.add("opening");
-      intro.classList.add("opening-hint-off");
-      const openDelay = reduceMotion ? 150 : 2100;
-      setTimeout(() => {
-        intro.classList.add("open");
-        intro.setAttribute("aria-hidden", "true");
-        document.body.classList.remove("locked");
-        setTimeout(() => intro.remove(), 1100);
-      }, openDelay);
-    },
-    { once: true }
-  );
+  // ลำดับ: ฝาซองเปิด → จดหมายเลื่อนขึ้น → จดหมายลอยพ้นซอง+ขยายเต็มจอ → จางเป็นหน้าการ์ด
+  let opened = false;
+  const openInvitation = () => {
+    if (opened) return;
+    opened = true;
+    envelope.classList.add("opening");
+    intro.classList.add("opening-hint-off");
+    const revealDelay = reduceMotion ? 120 : 700;
+    const openDelay = reduceMotion ? 300 : 1200;
+    setTimeout(() => envelope.classList.add("revealing"), revealDelay);
+    setTimeout(() => {
+      intro.classList.add("open");
+      intro.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("locked");
+      setTimeout(() => intro.remove(), 1000);
+    }, openDelay);
+  };
+
+  // ตราผนึกเลื่อนขึ้นไปกับฝาตอน hover แล้ว จึงให้คลิกที่ซองทั้งใบได้ (ปุ่มยังคงไว้เพื่อคีย์บอร์ด)
+  introBtn.addEventListener("click", openInvitation);
+  envelope.addEventListener("click", openInvitation);
 }
 
 // ===== BOTTOM NAV: highlight active section while scrolling =====
