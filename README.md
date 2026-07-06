@@ -179,6 +179,7 @@ online-card/
 
 ## Tech Stack
 - HTML / CSS / JavaScript (ไม่มี framework)
-- Google Fonts: Sarabun · Great Vibes · Cormorant Garamond
+- ฟอนต์ไทยหลัก: **FC Ekaluck** (self-hosted, ไฟล์อยู่ที่ `fonts/`, ประกาศ `@font-face` ใน `css/style.css`) · fallback: Sarabun (Google Fonts)
+- Google Fonts: Sarabun (fallback) · Great Vibes · Cormorant Garamond
 - Form: Tally.so embed
 - Host: GitHub Pages (free)
