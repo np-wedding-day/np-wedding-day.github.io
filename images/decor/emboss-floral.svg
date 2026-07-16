@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140">
+  <defs>
+    <path id="l" d="M0 0 C 6 -10, 18 -14, 27 -7 C 19 2, 7 4, 0 0 Z"/>
+    <g id="sprig">
+      <use href="#l" transform="rotate(-30) scale(0.9)"/>
+      <use href="#l" transform="rotate(18) scale(0.75)"/>
+      <use href="#l" transform="rotate(70) scale(0.8)"/>
+      <use href="#l" transform="rotate(130) scale(0.7)"/>
+      <circle r="1.6" transform="translate(2,-2)"/>
+    </g>
+  </defs>
+
+  <!-- shadow pass (offset down-right): reads as a pressed groove -->
+  <g fill="#7a5c3a" opacity="0.05" transform="translate(1.1,1.1)">
+    <use href="#sprig" transform="translate(20,24) rotate(8)"/>
+    <use href="#sprig" transform="translate(96,18) rotate(-22) scale(0.85)"/>
+    <use href="#sprig" transform="translate(58,70) rotate(45) scale(0.95)"/>
+    <use href="#sprig" transform="translate(14,104) rotate(-60) scale(0.8)"/>
+    <use href="#sprig" transform="translate(108,98) rotate(15) scale(0.75)"/>
+  </g>
+
+  <!-- highlight pass (offset up-left): reads as raised paper fiber -->
+  <g fill="#fffdf7" opacity="0.55" transform="translate(-0.6,-0.6)">
+    <use href="#sprig" transform="translate(20,24) rotate(8)"/>
+    <use href="#sprig" transform="translate(96,18) rotate(-22) scale(0.85)"/>
+    <use href="#sprig" transform="translate(58,70) rotate(45) scale(0.95)"/>
+    <use href="#sprig" transform="translate(14,104) rotate(-60) scale(0.8)"/>
+    <use href="#sprig" transform="translate(108,98) rotate(15) scale(0.75)"/>
+  </g>
+</svg>

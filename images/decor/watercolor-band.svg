@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 900" preserveAspectRatio="none">
+  <defs>
+    <filter id="wcBlur" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+  </defs>
+
+  <!-- back wash: sage -->
+  <path fill="#9dae8e" opacity="0.32" d="
+    M0,0 L0,900 L18,900
+    C30,860 44,835 32,800
+    C22,770 12,745 26,710
+    C40,680 46,650 30,615
+    C18,585 10,555 24,520
+    C38,490 44,460 28,425
+    C16,395 8,365 22,330
+    C36,300 42,270 26,235
+    C14,205 6,175 20,140
+    C34,110 40,80 24,45
+    C16,20 6,5 0,0 Z"/>
+
+  <!-- mid wash: gold -->
+  <path fill="#b08d4f" opacity="0.24" d="
+    M0,0 L0,900 L12,900
+    C24,875 38,850 24,818
+    C14,792 4,768 16,738
+    C30,706 34,676 20,644
+    C10,616 2,588 14,556
+    C28,528 32,498 18,466
+    C8,438 2,408 14,378
+    C26,350 30,320 16,290
+    C6,262 2,232 12,202
+    C24,174 28,144 14,112
+    C6,84 2,54 10,26
+    C6,12 2,4 0,0 Z"/>
+
+  <!-- front ribbon: olive-brown, defines the visible painted edge -->
+  <path fill="#7a5c3a" opacity="0.4" d="
+    M0,0 L0,900 L8,900
+    C18,880 30,862 20,838
+    C12,818 4,800 12,778
+    C22,754 26,732 16,708
+    C8,688 2,668 10,646
+    C20,624 24,600 14,578
+    C6,558 2,538 10,516
+    C20,494 24,470 14,448
+    C6,428 2,408 10,386
+    C20,364 24,340 14,318
+    C6,298 2,278 10,256
+    C20,234 24,210 14,188
+    C6,168 2,148 10,126
+    C20,104 24,80 14,58
+    C6,40 2,20 8,10
+    C6,4 2,1 0,0 Z"/>
+
+  <!-- soft ink blooms along the edge, like watercolor pooling -->
+  <ellipse cx="24" cy="120" rx="14" ry="20" fill="#7a5c3a" opacity="0.22" filter="url(#wcBlur)"/>
+  <ellipse cx="14" cy="330" rx="12" ry="26" fill="#8a9a7c" opacity="0.2" filter="url(#wcBlur)"/>
+  <ellipse cx="26" cy="540" rx="16" ry="22" fill="#b08d4f" opacity="0.2" filter="url(#wcBlur)"/>
+  <ellipse cx="12" cy="720" rx="12" ry="24" fill="#7a5c3a" opacity="0.2" filter="url(#wcBlur)"/>
+</svg>
