@@ -530,66 +530,72 @@ section {
 
 .petal {
   position: absolute;
-  top: -24px;
-  width: 11px;
-  height: 11px;
-  background: var(--sage);
-  border-radius: 80% 0 55% 50% / 55% 0 80% 50%;
+  top: -32px;
+  width: 24px;
+  height: 24px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
   opacity: 0;
   animation: petal-fall 12s linear infinite;
+}
+
+/* ใบไม้สลับ 2 แบบ: คี่ = left_piority.svg, คู่ = left_secorndary.svg */
+.petal:nth-child(odd) {
+  background-image: url("../images/decor/left_piority.svg");
+}
+.petal:nth-child(even) {
+  background-image: url("../images/decor/left_secorndary.svg");
 }
 
 .petal:nth-child(1) {
   left: 8%;
   animation-duration: 11s;
   animation-delay: 0s;
-  background: #b4c2a5;
+  width: 26px;
+  height: 26px;
 }
 .petal:nth-child(2) {
   left: 24%;
   animation-duration: 14s;
   animation-delay: 2.5s;
-  background: #dcc7b8;
-  width: 9px;
-  height: 9px;
+  width: 19px;
+  height: 19px;
 }
 .petal:nth-child(3) {
   left: 42%;
   animation-duration: 12s;
   animation-delay: 5s;
-  background: #cdb586;
-  width: 8px;
-  height: 8px;
+  width: 22px;
+  height: 22px;
 }
 .petal:nth-child(4) {
   left: 58%;
   animation-duration: 15s;
   animation-delay: 1.2s;
-  background: #9dae8e;
+  width: 17px;
+  height: 17px;
 }
 .petal:nth-child(5) {
   left: 74%;
   animation-duration: 13s;
   animation-delay: 3.8s;
-  background: #dcc7b8;
-  width: 10px;
-  height: 10px;
+  width: 24px;
+  height: 24px;
 }
 .petal:nth-child(6) {
   left: 88%;
   animation-duration: 11.5s;
   animation-delay: 6s;
-  background: #b4c2a5;
-  width: 9px;
-  height: 9px;
+  width: 18px;
+  height: 18px;
 }
 .petal:nth-child(7) {
   left: 50%;
   animation-duration: 16s;
   animation-delay: 8s;
-  background: #cdb586;
-  width: 7px;
-  height: 7px;
+  width: 20px;
+  height: 20px;
 }
 
 @keyframes petal-fall {
