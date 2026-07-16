@@ -523,9 +523,11 @@ section {
   z-index: 1;
 }
 
-.petal-field-hero {
-  height: min(120vh, 1000px);
-  bottom: auto;
+/* ลอยตรึงกับจอ ไม่เลื่อนไปกับเนื้อหา จึงร่วงต่อเนื่องตลอดทุก section */
+.petal-field-ambient {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
 }
 
 .petal {
