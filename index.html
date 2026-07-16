@@ -15,7 +15,7 @@
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Great+Vibes&family=Sarabun:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap"
     rel="stylesheet">
   <!-- ?v=N : เปลี่ยนเลขทุกครั้งที่แก้ css/js เพื่อบังคับ browser โหลดไฟล์ใหม่ -->
-  <link rel="stylesheet" href="css/style.css?v=31">
+  <link rel="stylesheet" href="css/style.css?v=32">
   <noscript>
     <style>
       .intro {
@@ -111,11 +111,17 @@
 
   <main class="sheet">
 
+    <!-- ต้นไม้ประดับบนสุดของการ์ด: วาง 2 ชุด สลับกระจก (mirror) ให้สมมาตรซ้าย-ขวา -->
+    <div class="tree-top" aria-hidden="true">
+      <img src="images/decor/tree.svg" alt="" class="tree-top-half tree-top-left">
+      <img src="images/decor/tree.svg" alt="" class="tree-top-half tree-top-right">
+    </div>
+
     <!-- ========== SECTION 1 : กำหนดการ ========== -->
     <section id="program">
 
       <!-- ดอกไม้บน: ใส่ไฟล์ images/flowers/flower-top.png (ถ้าไม่มี จะแสดง ornament SVG แทน) -->
-      <div class="floral floral-top">
+      <!-- <div class="floral floral-top">
         <img src="images/flowers/flower-top.png" alt=""
           onerror="this.closest('.floral').classList.add('img-missing'); this.remove()">
         <svg class="floral-fallback" viewBox="0 0 720 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -132,9 +138,9 @@
             <circle r="3.2" fill="#b08d4f" />
           </g>
         </svg>
-      </div>
+      </div> -->
 
-      <div class="hero-crest reveal" aria-hidden="true">
+      <div class="hero-crest reveal" aria-hidden="true" style="margin-top: 2rem;">
         <!-- <img src="images/logo/dargon.svg" alt=""> -->
         <img src="images/decor/newlyweds.svg" alt="">
       </div>
@@ -411,7 +417,7 @@
     </a>
   </nav>
 
-  <script src="js/main.js?v=31"></script>
+  <script src="js/main.js?v=32"></script>
 </body>
 
 </html>
