@@ -139,16 +139,339 @@ section {
   width: 100%;
   overflow: hidden;
   line-height: 0;
+  position: relative; /* containing block ให้ชั้นผีเสื้อที่ absolute */
+  z-index: 0; /* stacking context: กัน z-index ภายในไม่ให้แข่งกับแถบสีน้ำ (z-index 3) */
+  container-type: inline-size; /* ปลดล็อก cqw ให้ผีเสื้อสเกลตามความกว้างแถบ */
 }
 
 .tree-top-half {
   width: 50%;
   height: auto;
   display: block;
+  z-index: 1; /* คั่นกลางระหว่างผีเสื้อชั้นหลัง (0) กับชั้นหน้า (2) */
 }
 
 .tree-top-right {
   transform: scaleX(-1);
+}
+
+/* ===== BUTTERFLIES (ผีเสื้อบินบริเวณต้นไม้) =====
+   8 ตัว แบ่ง 2 ชั้น (หน้า/หลังพุ่มใบไม้) ให้เกิดมิติความลึก
+   ตำแหน่งตั้งต้น+สี จับคู่สมมาตรซ้าย-ขวา แต่ "การบิน" อิสระรายตัว
+   .bfly     = เส้นทางบิน (property `translate`) + เอียงตัว (property `rotate`) คนละคาบเวลา
+   .bfly-art = กระพือปีก (property `transform`)
+   ใช้ property คนละตัวกัน ทั้ง 3 แอนิเมชันจึงไม่ทับกันเอง */
+.bfly-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* ชั้นหลัง: เล็กกว่า จางกว่า เบลอนิด → ถอยลึกไปหลังพุ่มใบไม้ */
+.bfly-back {
+  z-index: 0;
+  opacity: 0.62;
+  filter: blur(0.4px);
+}
+
+/* ชั้นหน้า: ใหญ่กว่า ทึบเต็ม มีเงาจาง → ลอยเด่นออกมา */
+.bfly-front {
+  z-index: 2;
+  filter: drop-shadow(0 2px 3px rgba(74, 82, 64, 0.18));
+}
+
+.bfly {
+  position: absolute;
+  /* 2 แอนิเมชันวิ่งพร้อมกันคนละ property: translate (เส้นทางบิน) + rotate (เอียงตัว)
+     คาบเวลาไม่หารลงตัวกัน → การเคลื่อนไหวรวมแทบไม่ซ้ำรูปแบบเดิม จึงไม่ดูเป็นหุ่นยนต์
+     เส้นทางใช้ linear เพื่อร่อนต่อเนื่อง — ถ้าใช้ ease-in-out จะชะลอ-เร่งทุกคีย์เฟรมจนดูแข็ง */
+  animation: var(--path, bfly-path-a) var(--dur, 16s) linear infinite,
+    var(--bankname, bfly-bank-a) var(--bank, 5.3s) ease-in-out infinite;
+  /* delay ติดลบ = เริ่มกลางแอนิเมชันตั้งแต่โหลด (ไม่ค้างนิ่งรอ) และทำให้แต่ละตัวไม่พร้อมกัน */
+  animation-delay: var(--delay, 0s), calc(var(--delay, 0s) * 0.6);
+}
+
+.bfly-art {
+  width: 100%;
+  height: auto;
+  display: block;
+  animation: bfly-flap var(--flap, 1.1s) ease-in-out infinite;
+}
+
+/* จุดยึดตำแหน่งซ้าย/ขวา — ใช้ --x เป็นระยะห่างจากขอบ ทำให้ "ตำแหน่งตั้งต้น" ของคู่
+   ยังสมดุลซ้าย-ขวาโดยไม่ต้องหักลบความกว้างตัวเอง (ส่วนการบินกำหนดอิสระรายตัวด้านล่าง) */
+.bfly-l {
+  left: var(--x);
+}
+
+.bfly-r {
+  right: var(--x);
+}
+
+.bfly-back .bfly {
+  width: 18px; /* fallback เผื่อเบราว์เซอร์ไม่รองรับ cqw */
+  width: clamp(11px, 2.6cqw, 22px);
+}
+
+.bfly-front .bfly {
+  width: 24px; /* fallback เผื่อเบราว์เซอร์ไม่รองรับ cqw */
+  width: clamp(15px, 3.6cqw, 30px);
+}
+
+/* ตำแหน่งตั้งต้น/สี ของแต่ละคู่ — อิงความหนาแน่นของภาพต้นไม้
+   (บน ~62% ทึบใบไม้, 62-75% ชายพุ่ม, ล่าง ~25% อากาศโล่ง) */
+.bfly-p1 {
+  --x: 24%;
+  top: 22%;
+  --flap: 1.1s;
+  color: var(--gold);
+}
+
+.bfly-p2 {
+  --x: 12%;
+  top: 44%;
+  --flap: 1.35s;
+  color: var(--sage);
+}
+
+.bfly-p3 {
+  --x: 33%;
+  top: 66%;
+  --flap: 0.95s;
+  color: #a3714f; /* ดินเผา — เข้ากับสีกิ่งไม้ในภาพต้นไม้ */
+}
+
+.bfly-p4 {
+  --x: 18%;
+  top: 84%;
+  --flap: 1.2s;
+  color: #c9a86f; /* ทองอ่อน — อยู่ระหว่าง --gold กับ --gold-soft */
+}
+
+/* ===== การบินรายตัว (8 ตัว บินอิสระ ไม่สะท้อนกระจกกันแล้ว) =====
+   คาบ --dur (เส้นทาง) กับ --bank (เอียงตัว) ไม่ซ้ำกันเลยและไม่หารลงตัวกัน
+   --delay ติดลบ เพื่อให้ทุกตัวเริ่มคนละจุดของวงจรตั้งแต่โหลดหน้า
+   ตัวขวาเหลื่อม top เล็กน้อย ไม่ให้เรียงเป็นแถวตรงเป๊ะ
+   หมายเหตุ: คู่ p4 อยู่ล่างสุดจึงใช้ path-c ทั้งคู่ (เป็นเส้นทางที่กวาดขึ้นบน)
+             กันไม่ให้ชนขอบล่างของแถบที่ overflow: hidden */
+.bfly-p1.bfly-l {
+  --path: bfly-path-a;
+  --dx: 1;
+  --dur: 16s;
+  --bankname: bfly-bank-a;
+  --bank: 5.3s;
+  --delay: 0s;
+}
+
+.bfly-p1.bfly-r {
+  top: 26%;
+  --path: bfly-path-b;
+  --dx: -1;
+  --dur: 19s;
+  --bankname: bfly-bank-b;
+  --bank: 6.7s;
+  --delay: -3s;
+}
+
+.bfly-p2.bfly-l {
+  --path: bfly-path-b;
+  --dx: 1;
+  --dur: 21s;
+  --bankname: bfly-bank-a;
+  --bank: 7.1s;
+  --delay: -7s;
+}
+
+.bfly-p2.bfly-r {
+  top: 47%;
+  --path: bfly-path-a;
+  --dx: -1;
+  --dur: 17s;
+  --bankname: bfly-bank-b;
+  --bank: 4.9s;
+  --delay: -11s;
+}
+
+.bfly-p3.bfly-l {
+  --path: bfly-path-c;
+  --dx: 1;
+  --dur: 14s;
+  --bankname: bfly-bank-b;
+  --bank: 6.1s;
+  --delay: -5s;
+}
+
+.bfly-p3.bfly-r {
+  top: 69%;
+  --path: bfly-path-a;
+  --dx: -1;
+  --dur: 22s;
+  --bankname: bfly-bank-a;
+  --bank: 5.7s;
+  --delay: -13s;
+}
+
+.bfly-p4.bfly-l {
+  --path: bfly-path-c;
+  --dx: -1;
+  --dur: 18s;
+  --bankname: bfly-bank-a;
+  --bank: 7.9s;
+  --delay: -9s;
+}
+
+.bfly-p4.bfly-r {
+  top: 87%;
+  --path: bfly-path-c;
+  --dx: 1;
+  --dur: 15s;
+  --bankname: bfly-bank-b;
+  --bank: 6.3s;
+  --delay: -2s;
+}
+
+/* ----- เส้นทางบิน 3 แบบ (คุม property `translate` อย่างเดียว) -----
+   ระยะเป็น cqw จึงสเกลตามความกว้างแถบต้นไม้ทั้งเดสก์ท็อปและมือถือ
+   --dx: -1 กลับทิศแนวนอน → ได้ 6 รูปแบบจาก 3 ชุด
+   ทุกชุดปิดลูปสนิท (0% = 100%) จึงวนต่อเนื่องไม่กระตุก
+   คีย์เฟรมถี่และระยะไม่เท่ากัน เพื่อไม่ให้จังหวะคาดเดาได้ */
+@keyframes bfly-path-a {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  12% {
+    translate: calc(var(--dx, 1) * 3.5cqw) -2.2cqw;
+  }
+  26% {
+    translate: calc(var(--dx, 1) * 7.8cqw) -0.8cqw;
+  }
+  38% {
+    translate: calc(var(--dx, 1) * 9.6cqw) 2.6cqw;
+  }
+  52% {
+    translate: calc(var(--dx, 1) * 6.2cqw) 4.8cqw;
+  }
+  64% {
+    translate: calc(var(--dx, 1) * 1.8cqw) 3.4cqw;
+  }
+  77% {
+    translate: calc(var(--dx, 1) * -2.4cqw) 1.2cqw;
+  }
+  89% {
+    translate: calc(var(--dx, 1) * -1.6cqw) -1.8cqw;
+  }
+}
+
+/* เน้นแนวตั้งมากกว่า ระยะแคบกว่า — เหมาะกับตัวที่อยู่ชิดขอบ */
+@keyframes bfly-path-b {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  15% {
+    translate: calc(var(--dx, 1) * -2.8cqw) -3.4cqw;
+  }
+  30% {
+    translate: calc(var(--dx, 1) * -6.4cqw) -1.6cqw;
+  }
+  44% {
+    translate: calc(var(--dx, 1) * -5.2cqw) 2.2cqw;
+  }
+  58% {
+    translate: calc(var(--dx, 1) * -1.4cqw) 4.6cqw;
+  }
+  72% {
+    translate: calc(var(--dx, 1) * 2.6cqw) 2.8cqw;
+  }
+  86% {
+    translate: calc(var(--dx, 1) * 3.2cqw) -0.9cqw;
+  }
+}
+
+/* กวาดแนวนอนกว้าง แล้วยกตัวขึ้นบน — ใช้กับตัวล่างสุดเพื่อไม่ให้ชนขอบล่าง */
+@keyframes bfly-path-c {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  11% {
+    translate: calc(var(--dx, 1) * 4.2cqw) 1.4cqw;
+  }
+  24% {
+    translate: calc(var(--dx, 1) * 8.9cqw) 0.2cqw;
+  }
+  36% {
+    translate: calc(var(--dx, 1) * 11.2cqw) -2.4cqw;
+  }
+  50% {
+    translate: calc(var(--dx, 1) * 8.4cqw) -4.1cqw;
+  }
+  63% {
+    translate: calc(var(--dx, 1) * 3.6cqw) -3.2cqw;
+  }
+  76% {
+    translate: calc(var(--dx, 1) * -0.8cqw) -1.4cqw;
+  }
+  88% {
+    translate: calc(var(--dx, 1) * -1.2cqw) 1.1cqw;
+  }
+}
+
+/* ----- การเอียงตัว 2 แบบ (คุม property `rotate` อย่างเดียว) -----
+   เอียงกว้างถึงราว ±30° สลับซ้าย-ขวาคนละจังหวะกับการเคลื่อนที่ */
+@keyframes bfly-bank-a {
+  0%,
+  100% {
+    rotate: -6deg;
+  }
+  18% {
+    rotate: 22deg;
+  }
+  35% {
+    rotate: -14deg;
+  }
+  52% {
+    rotate: 29deg;
+  }
+  68% {
+    rotate: -24deg;
+  }
+  84% {
+    rotate: 11deg;
+  }
+}
+
+@keyframes bfly-bank-b {
+  0%,
+  100% {
+    rotate: 8deg;
+  }
+  16% {
+    rotate: -19deg;
+  }
+  33% {
+    rotate: 26deg;
+  }
+  49% {
+    rotate: -11deg;
+  }
+  66% {
+    rotate: 18deg;
+  }
+  82% {
+    rotate: -27deg;
+  }
+}
+
+@keyframes bfly-flap {
+  0%,
+  100% {
+    transform: scaleX(1);
+  }
+  50% {
+    transform: scaleX(0.42);
+  }
 }
 
 /* ===== INTRO COVER ===== */
@@ -1521,6 +1844,11 @@ section {
   }
   .schedule-item.live .schedule-icon,
   .schedule-item.live::before {
+    animation: none;
+  }
+  /* คงผีเสื้อให้เห็นอยู่ (ต่างจาก .petal ที่ซ่อน) — เกาะนิ่งบนต้นไม้ยังดูเป็นภาพประดับที่ตั้งใจ */
+  .bfly,
+  .bfly-art {
     animation: none;
   }
 }
