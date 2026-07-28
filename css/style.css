@@ -89,8 +89,14 @@ body.locked {
 .sheet {
   max-width: var(--card-w);
   margin: 0 auto;
-  background: var(--ivory);
-  box-shadow: 0 0 90px rgba(74, 82, 64, 0.16);
+  /* เนื้อกระดาษ: สีพื้น ivory + tile เกรน/เส้นใยปูซ้ำ (300x300 rasterize ครั้งเดียว)
+     inset shadow = ความหนาของแผ่นกระดาษ ขอบในเข้มกว่ากลางเล็กน้อย */
+  background-color: var(--ivory);
+  background-image: url("../images/decor/paper-fiber.svg");
+  background-repeat: repeat;
+  background-size: 400px 400px;
+  box-shadow: 0 0 90px rgba(74, 82, 64, 0.16),
+    inset 0 0 60px rgba(74, 82, 64, 0.05);
   position: relative;
   isolation: isolate;
 }
