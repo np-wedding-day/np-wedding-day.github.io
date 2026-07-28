@@ -89,12 +89,17 @@ body.locked {
 .sheet {
   max-width: var(--card-w);
   margin: 0 auto;
-  /* เนื้อกระดาษ: สีพื้น ivory + tile เกรน/เส้นใยปูซ้ำ (300x300 rasterize ครั้งเดียว)
-     inset shadow = ความหนาของแผ่นกระดาษ ขอบในเข้มกว่ากลางเล็กน้อย */
+  /* เนื้อกระดาษ: รูปถ่ายพื้นผิวกระดาษจริง (texture-paper.jpg) ปูซ้ำ
+     layer 1 = gradient สี ivory โปร่งแสง 55% ทาบทับ (blend แบบ normal)
+     layer 2 = ตัวรูป (blend แบบ multiply กับสีพื้น ivory)
+     ผลลัพธ์: multiply เพียวๆ ทำให้แผ่นออกเทาเกิน ชั้น ivory ทับดึงโทนกลับมาใกล้
+     ivory เดิม ให้เห็นเนื้อกระดาษจางๆ แบบกลมกลืน ไม่ทำให้เนื้อหาดูหม่น */
   background-color: var(--ivory);
-  background-image: url("../images/decor/paper-fiber.svg");
-  background-repeat: repeat;
-  background-size: 400px 400px;
+  background-image: linear-gradient(rgba(255, 253, 247, 0.55), rgba(255, 253, 247, 0.55)),
+    url("../images/decor/texture-paper.jpg");
+  background-repeat: no-repeat, repeat;
+  background-size: cover, 480px 480px;
+  background-blend-mode: normal, multiply;
   box-shadow: 0 0 90px rgba(74, 82, 64, 0.16),
     inset 0 0 60px rgba(74, 82, 64, 0.05);
   position: relative;
