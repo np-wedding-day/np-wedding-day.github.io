@@ -497,7 +497,11 @@ section {
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: radial-gradient(
+  /* วอลเปเปอร์พื้นหลัง (wallpaper.svg) ปูเต็มจอเสมอด้วย background-size:cover
+     ไม่ว่าสัดส่วนจอจะเป็นแนวตั้ง (มือถือ) หรือแนวนอน (desktop) — กรอบ tint
+     สีเขียว/ทองเดิมวางซ้อนทับด้านบนให้กลมกลืนกับโทนการ์ด */
+  background-color: var(--paper);
+  background-image: radial-gradient(
       ellipse 80% 60% at 50% 20%,
       rgba(157, 174, 142, 0.16) 0%,
       transparent 65%
@@ -507,7 +511,10 @@ section {
       rgba(176, 141, 79, 0.1) 0%,
       transparent 60%
     ),
-    var(--paper);
+    url("../images/decor/wallpaper.svg");
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-position: center, center, center;
+  background-size: auto, auto, cover;
   padding: 2rem;
   transition: opacity 1s ease, visibility 1s;
 }
@@ -516,20 +523,6 @@ section {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-}
-
-.intro-frame {
-  position: absolute;
-  inset: 14px;
-  border: 1px solid var(--gold-soft);
-  pointer-events: none;
-}
-
-.intro-frame::after {
-  content: "";
-  position: absolute;
-  inset: 5px;
-  border: 1px solid var(--gold-faint);
 }
 
 .intro-inner {
@@ -868,7 +861,16 @@ section {
   margin-top: 2.2rem;
   font-size: 1.2rem;
   letter-spacing: 0.06em;
-  color: var(--olive-soft);
+  color: var(--olive);
+  /* แผ่นรองสีขาวขุ่นๆ ให้ข้อความอ่านออกเสมอ ไม่ว่าจะตกบนส่วนไหนของวอลเปเปอร์
+     ที่มีสีสัน/ลวดลายหลากหลาย — text-shadow เสริมอีกชั้นกรณี backdrop-filter ไม่รองรับ */
+  background: rgba(255, 253, 247, 0.75);
+  padding: 0.5rem 1.3rem;
+  border-radius: 999px;
+  box-shadow: 0 2px 10px rgba(74, 82, 64, 0.1);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  text-shadow: 0 1px 3px rgba(255, 253, 247, 0.8);
   animation: hint-fade 2.8s ease-in-out infinite;
   transition: opacity 0.4s ease;
 }
