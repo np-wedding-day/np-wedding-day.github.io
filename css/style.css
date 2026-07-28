@@ -901,6 +901,60 @@ section {
   z-index: 50;
 }
 
+/* ===== SIDE TREES (ประดับขอบจอซ้าย-ขวา เฉพาะจอกว้าง) =====
+   ใช้ไฟล์ tree-art.svg ไฟล์เดียว แสดง 2 ที่ — container สูงเต็มจอเสมอ (top:0;bottom:0)
+   ไม่ผูก height กับ width ผ่าน aspect-ratio อีกต่อไป (เดิมทำให้สูงได้แค่ ~55% ของจอ
+   เพราะความกว้างถูก cap ไว้ไม่ให้ชนการ์ด) แทนที่ด้วย object-fit:cover +
+   object-position:left/right ให้รูปซูม/ครอปเติมเต็มความสูงเสมอ โดยยึดขอบนอก
+   (ซ้ายสุด/ขวาสุดของรูป) เป็นจุดอ้างอิง ให้แต่ละฝั่งเห็นคนละส่วนของต้นไม้
+   mix-blend-mode:multiply กลืนพื้นของภาพเข้ากับ --cream ของหน้า
+   mask-image ไล่จางขอบด้านในให้กลืนกับพื้นหลังแทนขอบสี่เหลี่ยมแข็งๆ — ไล่จางเริ่มตั้งแต่
+   40% (แทน 60% เดิม) ให้เนียนกว่าเดิม + filter:blur ลบรอยคมของภาพเล็กน้อยให้ดูกลืน
+   เป็นชั้นบรรยากาศแทนภาพถ่ายคมชัด
+   ความกว้างคำนวณจากพื้นที่ว่างจริงข้าง .sheet (calc((100vw - 820px)/2)) — เว้นระยะกันชน
+   จากการ์ดแค่ ~10px แทน 40px เดิม เพื่อให้ต้นไม้ชิดการ์ดมากขึ้น
+   ซ่อนโดยดีฟอลต์ โชว์เฉพาะจอกว้างที่มีที่ว่างพอข้าง .sheet (max-width 800px) */
+.side-tree {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: clamp(90px, calc((100vw - 820px) / 2), 340px);
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+  display: none;
+}
+
+.side-tree img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  mix-blend-mode: multiply;
+  filter: blur(0.4px);
+}
+
+.side-tree-left {
+  left: 0;
+  mask-image: linear-gradient(to right, black 40%, transparent 100%);
+}
+.side-tree-left img {
+  object-position: left center;
+}
+
+.side-tree-right {
+  right: 0;
+  mask-image: linear-gradient(to left, black 40%, transparent 100%);
+}
+.side-tree-right img {
+  object-position: right center;
+}
+
+@media (min-width: 1200px) {
+  .side-tree {
+    display: block;
+  }
+}
+
 .petal {
   position: absolute;
   top: -32px;
