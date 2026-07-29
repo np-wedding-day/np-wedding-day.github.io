@@ -929,7 +929,7 @@ section {
   position: fixed;
   top: 0;
   bottom: 0;
-  width: clamp(90px, calc((100vw - 820px) / 2), 440px);
+  width: clamp(90px, calc((100vw - 820px) / 2), 520px);
   overflow: hidden;
   z-index: 1;
   pointer-events: none;
