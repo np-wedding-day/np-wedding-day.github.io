@@ -499,7 +499,10 @@ section {
   text-align: center;
   /* วอลเปเปอร์พื้นหลัง (wallpaper.svg) ปูเต็มจอเสมอด้วย background-size:cover
      ไม่ว่าสัดส่วนจอจะเป็นแนวตั้ง (มือถือ) หรือแนวนอน (desktop) — กรอบ tint
-     สีเขียว/ทองเดิมวางซ้อนทับด้านบนให้กลมกลืนกับโทนการ์ด */
+     สีเขียว/ทองเดิมวางซ้อนทับด้านบนให้กลมกลืนกับโทนการ์ด
+     เนื้อกระดาษ (texture-paper.jpg) multiply ทับ wallpaper โดยตรง (เทคนิคเดียวกับ .sheet)
+     แล้วมีชั้นสี --paper โปร่งแสง 50% ทาบทับอีกที ดึงโทนที่มืดลงจาก multiply กลับมาสว่าง
+     กลมกลืน ก่อนจะถึงชั้น tint เขียว/ทองบนสุด */
   background-color: var(--paper);
   background-image: radial-gradient(
       ellipse 80% 60% at 50% 20%,
@@ -511,10 +514,13 @@ section {
       rgba(176, 141, 79, 0.1) 0%,
       transparent 60%
     ),
+    linear-gradient(rgba(251, 248, 240, 0.5), rgba(251, 248, 240, 0.5)),
+    url("../images/decor/texture-paper.jpg"),
     url("../images/decor/wallpaper.svg");
-  background-repeat: no-repeat, no-repeat, no-repeat;
-  background-position: center, center, center;
-  background-size: auto, auto, cover;
+  background-repeat: no-repeat, no-repeat, no-repeat, repeat, no-repeat;
+  background-position: center, center, center, center, center;
+  background-size: auto, auto, auto, 480px 480px, cover;
+  background-blend-mode: normal, normal, normal, multiply, normal;
   padding: 2rem;
   transition: opacity 1s ease, visibility 1s;
 }
