@@ -153,18 +153,18 @@ online-card/
 ```html
 <div class="schedule-timeline reveal" id="scheduleTimeline">
   <div class="schedule-item" data-time="07:19" data-dur="120">
-    <!-- 07:19–09:19 -->
+    <!-- 07:19–08:19 -->
     <p class="schedule-time">07:19</p>
     <p class="schedule-label">พิธีสงฆ์</p>
   </div>
-  <div class="schedule-item" data-time="09:19" data-dur="60">
-    <!-- 09:19–10:19 -->
-    <p class="schedule-time">09:19</p>
+  <div class="schedule-item" data-time="08:19" data-dur="60">
+    <!-- 08:19–9:19 -->
+    <p class="schedule-time">08:19</p>
     <p class="schedule-label">ขันหมาก</p>
   </div>
-  <div class="schedule-item" data-time="10:19" data-dur="60">
-    <!-- 10:19–11:30 -->
-    <p class="schedule-time">10:19</p>
+  <div class="schedule-item" data-time="9:19" data-dur="60">
+    <!-- 9:19–11:30 -->
+    <p class="schedule-time">9:19</p>
     <p class="schedule-label">รดน้ำสังข์</p>
   </div>
   <div class="schedule-item" data-time="11:30" data-dur="120">
@@ -178,9 +178,9 @@ online-card/
 ผลลัพธ์ในวันงานจริง (21/11/2026):
 
 - ก่อน 07:19 → ทุกพิธียังไม่ไฮไลต์
-- 07:19–09:19 → **พิธีสงฆ์** ไฮไลต์ป้าย "ตอนนี้"
-- 09:19–10:19 → พิธีสงฆ์จบ (ติ๊กถูก), **ขันหมาก** ไฮไลต์ป้าย "ตอนนี้"
-- 10:19–11:30 → ขันหมากจบ, **รดน้ำสังข์** ไฮไลต์
+- 07:19–08:19 → **พิธีสงฆ์** ไฮไลต์ป้าย "ตอนนี้"
+- 08:19–9:19 → พิธีสงฆ์จบ (ติ๊กถูก), **ขันหมาก** ไฮไลต์ป้าย "ตอนนี้"
+- 9:19–11:30 → ขันหมากจบ, **รดน้ำสังข์** ไฮไลต์
 - 11:30–13:19 → รดน้ำสังข์จบ, **ร่วมรับประทานอาหาร** ไฮไลต์
 - หลัง 13:19 → ทุกพิธีจบหมด (ติ๊กถูกทั้งหมด)
 
