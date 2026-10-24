@@ -1,3 +1,11 @@
+// ===== เริ่มที่บนสุดของหน้าเสมอ =====
+// เบราว์เซอร์จะจำตำแหน่งเลื่อนเดิมตอนรีเฟรช/กลับมาเปิดซ้ำ ทำให้หลังเปิดซองแล้วไปโผล่กลางหน้า
+// ปิดการจำตำแหน่ง + เลื่อนกลับบนสุด (ครอบคลุมกรณีกลับมาจาก bfcache ด้วย)
+if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+window.scrollTo(0, 0);
+window.addEventListener("pageshow", () => window.scrollTo(0, 0));
+window.addEventListener("load", () => window.scrollTo(0, 0));
+
 // ===== INTRO COVER (envelope + wax seal) =====
 const intro = document.getElementById("intro");
 const introBtn = document.getElementById("introBtn");
