@@ -926,10 +926,15 @@ section {
    จากการ์ดแค่ ~10px แทน 40px เดิม เพื่อให้ต้นไม้ชิดการ์ดมากขึ้น
    ซ่อนโดยดีฟอลต์ โชว์เฉพาะจอกว้างที่มีที่ว่างพอข้าง .sheet (max-width 800px) */
 .side-tree {
+  /* ระยะจากขอบจอถึงต้นไม้ = ส่วนที่เหลือหลังชิดการ์ด (ครึ่งการ์ด 400px + กันชน 10px)
+     จอธรรมดา (ต้นไม้เต็มพื้นที่ว่างพอดี) ค่านี้เป็น 0 เท่าเดิม แต่จอกว้างมากที่ต้นไม้ถึง
+     ค่า cap แล้ว ต้นไม้จะขยับเข้ามาชิดการ์ดแทนที่จะค้างอยู่ริมจอห่างจากการ์ดเป็นร้อยพิกเซล */
+  --tree-w: clamp(90px, calc((100vw - 820px) / 2), 520px);
+  --tree-edge: max(0px, calc(50% - 410px - var(--tree-w)));
   position: fixed;
   top: 0;
   bottom: 0;
-  width: clamp(90px, calc((100vw - 820px) / 2), 520px);
+  width: var(--tree-w);
   overflow: hidden;
   z-index: 1;
   pointer-events: none;
@@ -945,7 +950,7 @@ section {
 }
 
 .side-tree-left {
-  left: 0;
+  left: var(--tree-edge);
   mask-image: linear-gradient(to right, black 40%, transparent 100%);
 }
 .side-tree-left img {
@@ -953,7 +958,7 @@ section {
 }
 
 .side-tree-right {
-  right: 0;
+  right: var(--tree-edge);
   mask-image: linear-gradient(to left, black 40%, transparent 100%);
 }
 .side-tree-right img {
