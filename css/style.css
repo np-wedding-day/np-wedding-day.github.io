@@ -1587,35 +1587,25 @@ section {
   margin-bottom: 1.8rem;
 }
 
+/* 20 วงกลมเล็ก ไม่มีป้ายชื่อ ให้เห็นเป็นพาเลตต์เบาๆ ไม่รก
+   เรียง 4 คอลัมน์ x 5 แถว เหมือนภาพอ้างอิง */
 .theme-swatches {
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.4rem 0.8rem;
-  max-width: 360px;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
+  gap: 0.9rem 0.6rem;
+  max-width: 250px;
   margin: 0 auto;
 }
 
 .theme-swatches li {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.55rem;
-}
-
-.swatch {
-  width: clamp(56px, 16vw, 72px);
+  width: clamp(36px, 10vw, 44px);
   aspect-ratio: 1;
   border-radius: 50%;
   background: var(--swatch);
-  border: 3px solid var(--ivory);
-  box-shadow: 0 0 0 1px var(--gold-soft), 0 6px 14px rgba(74, 82, 64, 0.16);
-}
-
-.swatch-label {
-  font-size: 1rem;
-  line-height: 1.3;
-  color: var(--ink);
+  box-shadow: 0 0 0 2px var(--ivory), 0 0 0 3px var(--gold-faint),
+    0 3px 8px rgba(74, 82, 64, 0.14);
 }
 
 /* ===== REGISTER SECTION ===== */
