@@ -1561,6 +1561,63 @@ section {
   transform: none;
 }
 
+/* ===== THEME COLOR (Earth Tone dress code) ===== */
+.theme-section {
+  padding: 0 1.4rem 2.5rem;
+}
+
+.theme-content {
+  max-width: 560px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.theme-name {
+  font-family: var(--script);
+  font-size: 2.6rem;
+  line-height: 1.2;
+  color: var(--brown);
+  margin: 0.8rem 0 0.4rem;
+}
+
+.theme-note {
+  font-size: 1.15rem;
+  line-height: 1.9;
+  color: var(--olive-soft);
+  margin-bottom: 1.8rem;
+}
+
+.theme-swatches {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.4rem 0.8rem;
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+.theme-swatches li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.swatch {
+  width: clamp(56px, 16vw, 72px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--swatch);
+  border: 3px solid var(--ivory);
+  box-shadow: 0 0 0 1px var(--gold-soft), 0 6px 14px rgba(74, 82, 64, 0.16);
+}
+
+.swatch-label {
+  font-size: 1rem;
+  line-height: 1.3;
+  color: var(--ink);
+}
+
 /* ===== REGISTER SECTION ===== */
 #register {
   padding: 0 1.4rem 3rem;
